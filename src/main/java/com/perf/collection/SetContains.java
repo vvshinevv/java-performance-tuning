@@ -9,7 +9,6 @@ import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
 
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.TreeSet;
@@ -20,28 +19,27 @@ import java.util.concurrent.TimeUnit;
 @OutputTimeUnit(TimeUnit.MICROSECONDS)
 public class SetContains {
 
-
     int LOOP_COUNT = 1000;
     HashSet<String> hashSet;
     TreeSet<String> treeSet;
     LinkedHashSet<String> linkedHashSet;
 
     String data = "abcdefghijklmnopqrstuvwxyz";
-    String []keys;
+    String[] keys;
 
     @Setup(Level.Trial)
     public void setUp() {
         hashSet = new HashSet<>();
         treeSet = new TreeSet<>();
         linkedHashSet = new LinkedHashSet<>();
-        for (int loop = 0 ; loop < LOOP_COUNT ; loop++) {
+        for (int loop = 0; loop < LOOP_COUNT; loop++) {
             String tempData = data + loop;
             hashSet.add(tempData);
             treeSet.add(tempData);
             linkedHashSet.add(tempData);
         }
 
-        if(keys == null || keys.length != LOOP_COUNT) {
+        if (keys == null || keys.length != LOOP_COUNT) {
             keys = RandomKeyUtil.generateRandomSetKeysSwap(hashSet);
         }
     }
@@ -56,7 +54,7 @@ public class SetContains {
     @GenerateMicroBenchmark
     public void containsTreeSet() {
         for (String key : keys) {
-            treeSet. contains(key);
+            treeSet.contains(key);
         }
     }
 
